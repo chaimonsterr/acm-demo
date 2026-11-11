@@ -135,6 +135,18 @@ create index if not exists order_items_order_idx on public.order_items (order_id
 create index if not exists inquiries_created_idx on public.inquiries (created_at desc);
 
 -- ---------------------------------------------------------------
+-- Let the website's key reach these tables (the security rules above still apply).
+-- Needed on projects where new tables aren't exposed to the Data API automatically.
+-- ---------------------------------------------------------------
+grant usage on schema public to anon, authenticated;
+grant insert on public.inquiries to anon, authenticated;
+grant select, update, delete on public.inquiries to authenticated;
+grant select, insert, update on public.orders to authenticated;
+grant select, insert on public.order_items to authenticated;
+grant select on public.admins to authenticated;
+grant execute on function public.is_admin() to anon, authenticated;
+
+-- ---------------------------------------------------------------
 -- Reference images for custom requests (private; 5 MB images only)
 -- ---------------------------------------------------------------
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
