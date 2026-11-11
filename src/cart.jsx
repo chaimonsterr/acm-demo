@@ -22,9 +22,18 @@ export function CartProvider({ children }) {
 
   const add = (item) => setItems((list) => [...list, { ...item, key: Date.now() + Math.random() }])
   const remove = (key) => setItems((list) => list.filter((i) => i.key !== key))
+  const setQuantity = (key, quantity) =>
+    setItems((list) => list.map((i) => (i.key === key ? { ...i, quantity: Math.max(1, quantity) } : i)))
+  const clear = () => setItems([])
   const count = items.reduce((n, i) => n + i.quantity, 0)
+  const subtotal = items.reduce((n, i) => n + (i.unitPrice ? i.unitPrice * i.quantity : 0), 0)
+  const hasCustom = items.some((i) => !i.unitPrice)
 
-  return <CartContext.Provider value={{ items, add, remove, count }}>{children}</CartContext.Provider>
+  return (
+    <CartContext.Provider value={{ items, add, remove, setQuantity, clear, count, subtotal, hasCustom }}>
+      {children}
+    </CartContext.Provider>
+  )
 }
 
 export const useCart = () => useContext(CartContext)

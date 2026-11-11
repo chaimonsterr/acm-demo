@@ -21,7 +21,7 @@ export default function Footer() {
         <h4>Company</h4>
         <Link to="/">About</Link>
         <Link to="/checkout">Checkout</Link>
-        <Link to="/login">Account</Link>
+        <Link to="/account">Account</Link>
       </div>
       <div>
         <h4>Contact</h4>

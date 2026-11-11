@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { IMG, getProducts } from '../api.js'
 import ProductCard from '../components/ProductCard.jsx'
+import CustomRequestForm from '../components/CustomRequestForm.jsx'
 
 const STATS = [
   ['Material', 'Hand-carved', 'Solid mahogany, painted and detailed by aviation artisans.'],
@@ -64,33 +65,6 @@ function Featured() {
     <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))' }}>
       {items.map((p) => <ProductCard key={p.id} p={p} />)}
     </div>
-  )
-}
-
-function CustomForm() {
-  const [sent, setSent] = useState(false)
-  return (
-    <form
-      className="form-card"
-      onSubmit={(e) => {
-        e.preventDefault()
-        setSent(true)
-      }}
-    >
-      <h3>Send us your idea</h3>
-      {sent && <div className="notice">Demo copy: requests will be saved to the project database in the next build step. Nothing was sent.</div>}
-      <div className="row-2">
-        <div className="field"><label htmlFor="cf-name">Name</label><input id="cf-name" className="input" required /></div>
-        <div className="field"><label htmlFor="cf-email">Email</label><input id="cf-email" type="email" className="input" required /></div>
-      </div>
-      <div className="field"><label htmlFor="cf-phone">Phone (optional)</label><input id="cf-phone" className="input" /></div>
-      <div className="field">
-        <label htmlFor="cf-msg">Tell us about your custom model</label>
-        <textarea id="cf-msg" className="textarea" placeholder="Aircraft type, livery, tail numbers, scale, or anything else we should know..." required />
-      </div>
-      <div className="field"><label htmlFor="cf-file">Reference image (optional)</label><input id="cf-file" type="file" accept="image/*" className="input" /></div>
-      <button className="btn btn-primary btn-block" type="submit">Send request</button>
-    </form>
   )
 }
 
@@ -190,7 +164,7 @@ export default function Home() {
                 <li>Hear back from a designer by email</li>
               </ul>
             </div>
-            <CustomForm />
+            <CustomRequestForm />
           </div>
         </section>
 

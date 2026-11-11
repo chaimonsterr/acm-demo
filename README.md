@@ -9,9 +9,22 @@ It is **not** the official store: a banner says so on every page, search engines
 - Search, category filter, sorting, 24-per-page pagination
 - Product configurator (quantity, size, details) and a demo cart saved in the browser
 
+- Customize form: saves Custom Order inquiries (with optional reference image) to Supabase
+- Sign up / sign in with demo accounts (Supabase Auth)
+- Cart, checkout (login required, no payment) and an Account page with order status and requests
+
+## Supabase setup (once)
+1. Supabase → SQL Editor → paste `supabase/schema.sql` → Run.
+2. Authentication → URL Configuration → Site URL: `https://acm-demo-pi.vercel.app`
+3. For quick demo sign-ups: Authentication → Sign In / Providers → Email → turn off **Confirm email**
+   (otherwise each sign-up needs an email confirmation, and Supabase's built-in mailer only sends a few per hour).
+4. To make someone admin (for the control panel later): run the `insert into public.admins …` line at the bottom of `schema.sql`.
+
+The site uses the **publishable** key only (`src/supabase.js`). Never put a secret key in this repo.
+
 ## Coming next
-- Customize, Login/Sign up, Cart and Checkout pages (demo accounts and orders in Supabase, no payment)
 - The chatbot widget (one `<script>` line in `index.html`, already marked)
+- The owner's control panel
 
 ## Run locally
 ```bash

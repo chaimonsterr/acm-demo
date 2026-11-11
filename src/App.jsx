@@ -7,10 +7,17 @@ import Home from './pages/Home.jsx'
 import Shop from './pages/Shop.jsx'
 import Product from './pages/Product.jsx'
 import Placeholder from './pages/Placeholder.jsx'
+import Customize from './pages/Customize.jsx'
+import Login from './pages/Login.jsx'
+import Cart from './pages/Cart.jsx'
+import Checkout from './pages/Checkout.jsx'
+import Account from './pages/Account.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
-  useEffect(() => window.scrollTo(0, 0), [pathname])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
   return null
 }
 
@@ -26,10 +33,11 @@ export default function App() {
           <Route path="/shop" element={<Shop eyebrow="Catalog" />} />
           <Route path="/collections" element={<Shop eyebrow="Collections" />} />
           <Route path="/product/:slug" element={<Product />} />
-          <Route path="/customize" element={<Placeholder title="Customize your airplane model" />} />
-          <Route path="/checkout" element={<Placeholder title="Checkout" />} />
-          <Route path="/cart" element={<Placeholder title="Your cart" />} />
-          <Route path="/login" element={<Placeholder title="Sign in to your account" />} />
+          <Route path="/customize" element={<Customize />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/account" element={<Account />} />
           <Route path="*" element={<Placeholder title="Page not found" notFound />} />
         </Routes>
       </main>

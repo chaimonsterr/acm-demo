@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { IMG } from '../api.js'
 import { useCart } from '../cart.jsx'
+import { useAuth } from '../auth.jsx'
 import ThemeToggle from './ThemeToggle.jsx'
 import { CartIcon, MenuIcon, UserIcon } from './Icons.jsx'
 
@@ -16,8 +17,11 @@ const LINKS = [
 export default function Header() {
   const [open, setOpen] = useState(false)
   const { count } = useCart()
+  const { user } = useAuth()
   const { pathname } = useLocation()
-  useEffect(() => setOpen(false), [pathname])
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
 
   return (
     <header className="site-header">
@@ -34,7 +38,7 @@ export default function Header() {
           </nav>
           <div className="header-actions">
             <ThemeToggle />
-            <Link to="/login" className="icon-btn" aria-label="Account"><UserIcon /></Link>
+            <Link to={user ? '/account' : '/login'} className={'icon-btn' + (user ? ' signed-in' : '')} aria-label="Account"><UserIcon /></Link>
             <Link to="/cart" className="icon-btn" aria-label="Cart">
               <CartIcon />
               {count > 0 && <span className="badge">{count}</span>}
