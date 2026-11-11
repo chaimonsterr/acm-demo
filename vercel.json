@@ -1,0 +1,14 @@
+{
+  "rewrites": [
+    { "source": "/api/products", "destination": "https://aircraftcitymodel.com/api/products" },
+    { "source": "/api/product-sizes", "destination": "https://aircraftcitymodel.com/api/product-sizes" },
+    { "source": "/live/assets/:path*", "destination": "https://aircraftcitymodel.com/assets/:path*" },
+    { "source": "/((?!api/|live/|assets/).*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
+    }
+  ]
+}
